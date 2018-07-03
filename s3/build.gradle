@@ -1,0 +1,30 @@
+group 'org.lion.demo'
+version '1.0-SNAPSHOT'
+apply plugin: 'war'
+dependencies {
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+}
+
+
+apply plugin: 'com.bmuschko.tomcat'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def tomcatVersion = '7.0.76'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    compileOnly group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+}
+tomcat {
+    httpPort = 18010
+    contextPath = '/'
+}
+
+tomcatRun.outputFile = new File("/tmp/tomcat_log")

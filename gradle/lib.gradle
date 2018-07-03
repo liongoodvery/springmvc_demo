@@ -1,0 +1,17 @@
+def createPackage(File baseDir) {
+    def f = new File(baseDir,
+            project.group.toString().replace('.', '/')
+                    + "/" + project.name)
+    if (!f.exists()) f.mkdirs()
+}
+
+task createBasePackage(group: "util") {
+    sourceSets.forEach {
+        Set<File> files = []
+        files.addAll(it.java.srcDirs)
+        files.addAll(it.resources.srcDirs)
+        files.forEach {
+            dir -> createPackage(dir)
+        }
+    }
+}

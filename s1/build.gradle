@@ -1,0 +1,4 @@
+group 'org.lion.demo'
+version '1.0-SNAPSHOT'
+
+apply from: "${rootDir.toString()}/gradle/lib.gradle"
